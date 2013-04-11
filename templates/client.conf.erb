@@ -46,9 +46,12 @@ user.*                         -/var/log/user.log
 # Logging for the mail system.  Split it up so that
 # it is easy to write scripts to parse these files.
 #
-mail.info                      -/var/log/mail.info
 mail.warn                      -/var/log/mail.warn
 mail.err                        /var/log/mail.err
+#mail.info                      -/var/log/mail.info
+#separate the info log
+if $syslogfacility-text == 'mail' and ($msg contains 'connect') then /var/log/mail.connnect
+if $syslogfacility-text == 'mail' and not ($msg contains 'connect') then /var/log/mail.info)
 
 #
 # Logging for INN news system.
