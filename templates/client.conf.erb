@@ -48,10 +48,11 @@ user.*                         -/var/log/user.log
 #
 mail.warn                      -/var/log/mail.warn
 mail.err                        /var/log/mail.err
-#mail.info                      -/var/log/mail.info
-#separate the info log
-if $syslogfacility-text == 'mail' and ($msg contains 'connect') then /var/log/mail.connnect
-if $syslogfacility-text == 'mail' and not ($msg contains 'connect') then /var/log/mail.info
+mail.info                      -/var/log/mail.info
+#output the undelivered mail to mail.undelivery
+if $syslogfacility-text == 'mail' and $syslogseverity-text == 'info' then {
+  if $msg contains 'status=bounced' or 'status=deferred' then /var/log/mail.undelivery
+}
 
 #
 # Logging for INN news system.
