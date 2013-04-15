@@ -50,11 +50,7 @@ mail.warn                      -/var/log/mail.warn
 mail.err                        /var/log/mail.err
 mail.info                      -/var/log/mail.info
 #output the undelivered mail to mail.nondelivery
-if $syslogfacility-text == 'mail' and $syslogseverity-text == 'info' then {
-  if $msg contains 'status=bounced' or $msg contains 'status=deferred' then {
-    /var/log/mail.nondelivery
-  }
-}
+if $syslogfacility-text == 'mail' and $syslogseverity-text == 'info' and ($msg contains 'status=bounced' or $msg contains 'status=deferred') then /var/log/mail.nondelivery
 
 #
 # Logging for INN news system.
