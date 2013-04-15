@@ -51,7 +51,9 @@ mail.err                        /var/log/mail.err
 mail.info                      -/var/log/mail.info
 #output the undelivered mail to mail.undelivery
 if $syslogfacility-text == 'mail' and $syslogseverity-text == 'info' then {
-  if $msg contains 'status=bounced' or 'status=deferred' then /var/log/mail.undelivery
+  if $msg contains 'status=bounced' or $msg contains 'status=deferred' then {
+    /var/log/mail.undelivery
+  }
 }
 
 #
