@@ -30,7 +30,7 @@ class rsyslog::params {
       $log_style              = 'debian'
       $perm_file              = '0640'
       $perm_dir               = '0755'
-      $spool_dir              = '/var/spool/rsyslog/'
+      $spool_dir              = '/var/spool/rsyslog'
       $service_name           = 'rsyslog'
       $client_conf            = "${rsyslog_d}client.conf"
       $server_conf            = "${rsyslog_d}server.conf"
